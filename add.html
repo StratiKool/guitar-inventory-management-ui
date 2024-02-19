@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800'900&display=swap");
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body{
+            min-height: 100vh;
+            background-color: rgb(144, 225, 179);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            color: rgb(161, 112, 21);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .navbar a{
+            font-size: 24px;
+            color: black;
+            font-weight: 700;
+            text-decoration: none;
+            margin-left: 40px;
+        }
+        .labels{
+            display: flex;
+            flex-direction:column;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+        }
+
+        .btn button {
+            font-size: 20px;
+            font-family: "Poppins", sans-serif;
+            font-weight: bold;
+            padding: 0.5rem 1em;
+            margin: 0.25em;
+            border-radius: 1em;
+            border: none;
+            outline: none;
+            background: rgb(57, 189, 114);
+            cursor: pointer;
+        }
+        .inputBox {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 350px;
+        }   
+
+        .inputBox label {
+            width: 140px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .inputBox label span {
+            white-space: nowrap;
+        }
+
+        .inputBox input {
+            flex: 1;
+            width: calc(100% - 150px); /* Adjusted width for the input field */
+            padding: 10px;
+            border: 1px solid black;
+            background-color: transparent;
+            border-radius: 5px;
+            outline: none;
+            color: black;
+            font-size: 1em;
+        }
+        
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Guitar Inventory Management</a>
+    
+        <nav class="navbar">
+            <a href="about.html">About</a>
+            <a href="add.html">Add</a>
+            <a href="search.html">Search</a>
+        </nav>
+    </header>
+    <div class="labels">
+ 
+        <div class="inputBox">
+            <label><span>Serial number:</span></label>
+            <input id="serialNumber"/>
+        </div>
+        <br />
+        <div class="inputBox">
+            <label><span>Price:</span></label>
+            <input id="price" />
+        </div>
+        <br />
+        <div class="inputBox">
+            <label><span>Builder:</span></label>
+            <input id="builder" />
+        </div>
+        <br />
+        <div class="inputBox">
+            <label><span>Model:</span></label>
+            <input id="model" />
+        </div>
+        <br />
+        <div class="inputBox">
+            <label><span>Type:</span></label>
+            <input id="type" />
+        </div>
+        <br />
+        <div class="inputBox">
+            <label><span>Back wood:</span></label>
+            <input id="backWood" />
+        </div>
+        <br />
+        <div class="inputBox">
+            <label><span>Top wood:</span></label>
+            <input id="topWood" />
+        </div>
+        <br />
+
+        <div class="btn">
+            <button onclick="addTheGuitar()">Add the guitar</button>
+        </div>
+    </div>
+
+    
+
+    <script>
+        function addTheGuitar() {
+           let serialNumberNode = document.getElementById("serialNumber");
+           let serialNumber = serialNumberNode.value;
+           let priceNode = document.getElementById("price");
+           let price = priceNode.value;
+           let builderNode = document.getElementById("builder");
+           let builder = builderNode.value;
+           let modelNode = document.getElementById("model");
+           let model = modelNode.value;
+           let typeNode = document.getElementById("type");
+           let type = typeNode.value;
+           let backWoodNode = document.getElementById("backWood");
+           let backWood = backWoodNode.value;
+           let topWoodNode = document.getElementById("topWood");
+           let topWood = topWoodNode.value;
+           let guitar = {serialNumber: serialNumber, price: price, builder: builder, model: model, type: type, backWood: backWood, topWood: topWood};
+
+           alert("You entered: " + JSON.stringify(guitar));
+
+        }
+    </script>
+
+</body>
+</html>
