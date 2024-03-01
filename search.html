@@ -188,14 +188,29 @@
     </div>
 
     <script>
-        let guitars = [
-            { serialNumber: "1", price: 199.99, builder: "Builder1", model: "Model1", type: "Type1", backWood: "BackWood1", topWood: "TopWood1"},
-            { serialNumber: "2", price: 299.99, builder: "Builder2", model: "Model2", type: "Type2", backWood: "BackWood2", topWood: "TopWood2"},
-            { serialNumber: "3", price: 399.99, builder: "Builder3", model: "Model3", type: "Type3", backWood: "BackWood3", topWood: "TopWood3"},
-            { serialNumber: "4", price: 499.99, builder: "Builder4", model: "Model4", type: "Type4", backWood: "BackWood4", topWood: "TopWood4"},
-            { serialNumber: "5", price: 599.99, builder: "Builder5", model: "Model5", type: "Type5", backWood: "BackWood5", topWood: "TopWood5"},
-        ];
-        function search() {
+        let guitars = [];
+
+        async function getAll(){
+            let host = "https://guitar-inventory-management-backend.onrender.com";
+
+            let request = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            };
+            let response = await fetch(host + "/getAll", request);
+            if(response.status == 200){
+                return response.json();
+            }else{
+                alert("Something went wrong in the backend!")
+            }
+        }
+
+        async function search() {
+            if(guitars.length == 0){
+                guitars = await getAll();
+            }
             let builder = document.getElementById("builder").value.toUpperCase();
             let model = document.getElementById("model").value.toUpperCase();
             let type = document.getElementById("type").value.toUpperCase();
