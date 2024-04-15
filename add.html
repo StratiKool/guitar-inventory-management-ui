@@ -204,7 +204,7 @@
             body: JSON.stringify(guitar)
            };
            const headers = {'Authorization': `Bearer ${configuration.token()}`};
-            let response = await fetch(host + "/add", { headers })
+            return response = await fetch(host + "/add", { headers })
                 .then((response) => 
                 {
                     if(response.status == 401){
