@@ -103,6 +103,7 @@
             <a href="about.html">About</a>
             <a href="add.html">Add</a>
             <a href="search.html">Search</a>
+            <a href="login.html">Login</a>
         </nav>
     </header>
     <div class="labels">
@@ -150,8 +151,9 @@
 
     
 
+    <script src="configuration.js"></script>
     <script>
-        let host = "https://guitar-inventory-management-backend.onrender.com";
+        let host = getHost();
 
         async function addTheGuitar() {
            let message = ""; 
@@ -196,18 +198,26 @@
            let request = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${configuration.token()}`
             },
             body: JSON.stringify(guitar)
            };
-           let response = await fetch(host + "/add", request);
-           if(response.status == 200){          
-            message = "The guitar was added to the system.";
-          }else {
-            message = "Something went wrong. Please try again or contact the customer support team.";
-          }
-          alert(message);
+           const headers = {'Authorization': `Bearer ${configuration.token()}`};
+            let response = await fetch(host + "/add", { headers })
+                .then((response) => 
+                {
+                    if(response.status == 401){
+                        logout();
+                    }
+                    return response.json();
+                })
+                .catch((error) => {
+                    console.log(error);
+                    alert("Something went wrong!");
 
+                    return [];
+                });
         }
     </script>
 

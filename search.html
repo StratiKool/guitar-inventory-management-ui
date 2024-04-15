@@ -134,6 +134,7 @@
             <a href="about.html">About</a>
             <a href="add.html">Add</a>
             <a href="search.html">Search</a>
+            <a href="login.html">Login</a>
         </nav>
     </header>
     <div class="labels">
@@ -186,25 +187,36 @@
             </tbody>
         </table>
     </div>
+    <script src="configuration.js"></script>
 
     <script>
         let guitars = [];
 
         async function getAll(){
-            let host = "https://guitar-inventory-management-backend.onrender.com";
+            let host = getHost();
 
             let request = {
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${configuration.token()}`
                 },
             };
-            let response = await fetch(host + "/getAll", request);
-            if(response.status == 200){
-                return response.json();
-            }else{
-                alert("Something went wrong in the backend!")
-            }
+            const headers = {'Authorization': `Bearer ${configuration.token()}`};
+            let response = await fetch(host + "/getAll", { headers })
+                .then((response) => 
+                {
+                    if(response.status == 401){
+                        logout();
+                    }
+                    return response.json();
+                })
+                .catch((error) => {
+                    console.log(error);
+                    alert("Something went wrong!");
+
+                    return [];
+                });
         }
 
         async function search() {
