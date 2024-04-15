@@ -203,7 +203,7 @@
                 },
             };
             const headers = {'Authorization': `Bearer ${configuration.token()}`};
-            let response = await fetch(host + "/getAll", { headers })
+            return response = await fetch(host + "/getAll", { headers })
                 .then((response) => 
                 {
                     if(response.status == 401){
