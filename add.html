@@ -203,23 +203,15 @@
             },
             body: JSON.stringify(guitar)
            };
-           const headers = {'Authorization': `Bearer ${configuration.token()}`};
-            return response = await fetch(host + "/add", { headers })
-                .then((response) => 
-                {
-                    if(response.status == 401){
-                        logout();
-                    }
-                    return response.json();
-                })
-                .catch((error) => {
-                    console.log(error);
-                    alert("Something went wrong!");
-
-                    return [];
-                });
+           let response = await fetch(host + "/add", request);
+            if (response.status == 200) {
+                message = "The guitar was added successfully!";
+            } else {
+                console.log(response);
+                message = "Something went wrong! Guitar was not added.";
+            }
         }
-    </script>
+    </script>x
 
 </body>
 </html>
