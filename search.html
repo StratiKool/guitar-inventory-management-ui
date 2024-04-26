@@ -191,9 +191,9 @@
 
     <script>
         let guitars = [];
-
+        let host = getHost();
+        
         async function getAll(){
-            let host = getHost();
 
             let request = {
                 method: "GET",
